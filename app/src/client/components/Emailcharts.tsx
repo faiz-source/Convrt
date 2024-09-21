@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'wasp/client/operations';
 import { getCampaigns } from 'wasp/client/operations';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Group,  ThemeIcon,  } from '@mantine/core';
 import ArrowOutwardIcon  from '@mui/icons-material/ArrowOutward';
+import { useMediaQuery } from '@mantine/hooks';
+import { BarChart } from '@mantine/charts';
 import '../Main.css';
 
 const EmailStatusChart = () => {
   const { data: campaigns, isLoading: isCampaignsLoading } = useQuery(getCampaigns);
   const [stats, setStats] = useState<any[]>([]);
   const [chartData, setChartData] = useState<any[]>([]);
+  const isSmallScreen = useMediaQuery('(max-width: 768px)'); // Adjust the breakpoint if needed
 
   useEffect(() => {
     if (campaigns) {
@@ -37,7 +39,7 @@ const EmailStatusChart = () => {
       const bounceRate = ((bouncedEmails / totalEmails) * 100).toFixed(2);
 
       const newStats = [
-        { title: 'Total Mails Sent', value: totalEmails, icon: <SunIcon /> },
+        { title: 'Total Sent', value: totalEmails, icon: <SunIcon /> },
         { title: 'Open Rate', value: `${openRate}%`, icon: <FaceIcon /> },
         { title: 'Delivery Rate', value: `${deliveryRate}%`, icon: <ImageIcon /> },
         { title: 'Bounce Rate', value: `${bounceRate}%`, icon: <SunIcon /> },
@@ -63,16 +65,16 @@ const EmailStatusChart = () => {
 
   return (
     <Box sx={{ height: '60vh' }}>
-      <Grid container   spacing={1}>
+      <Grid container   spacing={2}>
         <Grid  item xs={12} md={6}>
 
         <Grid  >
-      <Grid container className='flex pl-4 lg:pl-0  '  spacing={2}>
+      <Grid container className='flex   '  spacing={2}>
         
 
       {stats.map((stat, index) => (
         <Grid  item xs={6} sm={6} md={6} key={index}>
-         <div className='border  rounded-3xl pt-4 pb-8 px-6'>
+         <div className='border  rounded-3xl pt-4 pb-8 px-4 lg:px-6'>
         <Group >
           <div className="w-full relative">
 
@@ -84,19 +86,17 @@ const EmailStatusChart = () => {
     backgroundColor: 'black',
     position : 'absolute',
     right : 0,
-    width: '3rem', // Default width for larger screens
-    height: '3rem', // Default height for larger screens
   }}
-   className="w-12 h-12 md:w-128 md:h-128"
+  size={isSmallScreen ? 24 : 38} // Responsive size
   radius="xl"
 >
   <ArrowOutwardIcon className="text-blue" />
 </ThemeIcon>
 
-            <h1 className="text-zinc-400 mb-2 font-semibold font-Inter">
+            <h1 className=" w-3/4 text-zinc-400 mb-2 text-sm font-semibold font-Inter">
               {stat.title}
             </h1>
-            <h1 className="text-black text-2xl mb-8 font-bold font-Poppins">
+            <h1 className="text-black text-2xl mb-4 lg:mb-8 font-bold font-Poppins">
               {stat.value}
             </h1>
           </div>
@@ -104,7 +104,7 @@ const EmailStatusChart = () => {
         </Group>
       
 
-<div className="w-full h-24 md:h-16">
+<div className="w-full h-12 md:h-16">
   <svg
     className="w-full h-full"
     viewBox="0 0 2000 600"
@@ -136,16 +136,15 @@ const EmailStatusChart = () => {
 
 
         <Grid item xs={12} md={6}>
-          <ResponsiveContainer width="100%" height={450}>
-            <BarChart data={chartData} barCategoryGap="20%">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="emails" fill="#000000" />
-            </BarChart>
-          </ResponsiveContainer>
+
+
+    <BarChart
+      h={600}
+      data={chartData}
+      dataKey="name"
+      series={[{ name: 'emails', color: 'blue' }]}
+    />
+
         </Grid>
 
 
