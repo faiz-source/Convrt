@@ -5,11 +5,17 @@ import AppNavBar from './components/AppNavBar';
 import { useMemo, useEffect, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import {NextUIProvider} from '@nextui-org/react'
+import { createTheme, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
 
 
 export default function App({ children }: { children: ReactNode }) {
   const location = useLocation();
   const { data: user } = useAuth();
+
+  const theme = createTheme({
+    /** Put your mantine theme override here */
+  });
 
   const shouldDisplayAppNavBar = useMemo(() => {
     return location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/signup'  && location.pathname !== '/write' ;
@@ -43,6 +49,7 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
+     <MantineProvider theme={theme}>
      <NextUIProvider>
       <div className='min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isAdminDashboard ? (
@@ -55,6 +62,7 @@ export default function App({ children }: { children: ReactNode }) {
         )}
       </div>
       </NextUIProvider>
+      </MantineProvider>
     </>
   );
 }

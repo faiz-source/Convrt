@@ -6,6 +6,69 @@
 @tailwind utilities;
 
 
+/*button start*/
+
+.radial-gradient {
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(0, 0, 0, 0.5) 0%, /* Black with 5% opacity */
+    transparent 60%
+  ),
+  rgba(2, 2, 2, 2); /* Solid black */
+}
+
+
+.linear-mask {
+  mask-image: linear-gradient(
+    -75deg,
+    white calc(var(--x) + 20%),
+    transparent calc(var(--x) + 30%),
+    white calc(var(--x) + 100%)
+  );
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    white calc(var(--x) + 20%),
+    transparent calc(var(--x) + 30%),
+    white calc(var(--x) + 100%)
+  );
+}
+
+.linear-overlay {
+  background-image: linear-gradient(
+    -75deg,
+    rgba(var(--overlay-color), 0.1) calc(var(--x) + 20%),
+    rgba(var(--overlay-color), 0.5) calc(var(--x) + 25%),
+    rgba(var(--overlay-color), 0.1) calc(var(--x) + 100%)
+  );
+  mask: 
+    linear-gradient(#cccccc, #cccccc) content-box, /* Replacing black with a lighter gray */
+    linear-gradient(#cccccc, #cccccc);
+  -webkit-mask:
+    linear-gradient(#cccccc, #cccccc) content-box,
+    linear-gradient(#cccccc, #cccccc);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+
+/*button end*/
+
+
+/*statscard start*/
+
+.root {
+  padding: calc(var(--mantine-spacing-xl) * 1.5);
+}
+
+.statcard {
+  background-color: cornflowerblue;
+}
+
+/*statscard end*/
+
+
+
+
   @layer base {
     
     body {
@@ -78,6 +141,7 @@
       --input: 240 3.7% 15.9%;
       --ring: 240 4.9% 83.9%;
     }
+
 
 
     

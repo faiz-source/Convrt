@@ -25,9 +25,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 import { Button } from "@nextui-org/react";
-import {Chip, } from "@nextui-org/react";
+import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import EmailStatusChart from '../components/Emailcharts';
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 
 const NoBorderTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -104,13 +105,18 @@ const FileUploadPage = ({ user }: { user: User }) => {
     <div>
       {verified ? (
         <>
-          <div className="mt-12">
+          <div className="mt-8 lg:mt-16 px-4 lg:px-8">
+
             <div className='flex flex-row content-center'>
-          <h2 className=' ml-4 mb-12 mr-4 text-3xl font-semibold tracking-tight text-gray-900 '>
+          <h2 className='mb-3 lg:mb-3 ml-4 lg:ml-4  mr-4 text-3xl font-semibold font-Poppins tracking-tight text-gray-900 '>
             MailBoard              
           </h2>
-          <Chip className='mt-1' color="warning" variant="solid"><h1 className='text-white'>New</h1></Chip>
+          <Chip className='mt-1' avatar={<DonutSmallIcon />} label="New" />
           </div>
+          <div className='text-sm ml-4 lg:ml-4 mb-8 lg:mb-12 mr-4 font-normal font-Inter tracking-tight text-zinc-400 '>
+            <p>Analytics are refreshed every 90 days </p>
+          </div>
+        
             <Modal open={open} onClose={handleClose}>
               <Box sx={style}>
               <Typography sx={{

@@ -14,6 +14,7 @@ import { UserMenuItems } from '../components/UserMenuItems';
 import Testimonials from './Testimonials';
 import Features from './Features';
 import Footer from './Footer';
+import ShinyButton from '../components/Button';
 
 
 export default function LandingPage() {
@@ -121,7 +122,7 @@ export default function LandingPage() {
         </Dialog>
       </header>
 
-      <main className='isolate dark:bg-boxdark-2'>
+      <main className='dark:bg-boxdark-2'>
         {/* Hero section */}
         <div className='relative pt-14 w-full '>
           <div
@@ -149,18 +150,10 @@ export default function LandingPage() {
           <div className='py-24 sm:py-32'>
             <div className='mx-auto max-w-8xl px-6 lg:px-8'>
               <div className='lg:mb-18 mx-auto max-w-3xl text-center'>
-                <h1 className='text-4xl mb-6 font-Poppins font-semibold text-gray-900 sm:text-6xl dark:text-white'>
-                Turn  <span className='italic'>Emails</span> into Revenue
+                <h1 className='text-4xl mb-4 md:mb-12 font-Poppins font-semibold text-gray-900 sm:text-6xl dark:text-white'>
+                Supercharge Your Lead Generation
                 </h1>
-                <p>Win new customers with the #1 email marketing and automations platform* that recommends ways to get more opens, clicks, and sales.</p>
-                <div className='mt-10 flex items-center justify-center gap-x-6'>
-                  <a
-                    href={DOCS_URL}
-                    className='rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-200 hover:ring-2 hover:ring-yellow-300 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-white'
-                  >
-                    Get Started <span aria-hidden='true'>→</span>
-                  </a>
-                </div>
+               <ShinyButton />
               </div>
               <div className='mt-14 flow-root sm:mt-14 '>
                 <div className='-m-2 rounded-xl  lg:-m-4 lg:rounded-2xl lg:p-4'>

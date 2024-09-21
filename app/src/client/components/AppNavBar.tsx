@@ -23,36 +23,49 @@ export default function AppNavBar() {
   const { data: user, isLoading: isUserLoading } = useAuth();
   return (
     <header className='absolute inset-x-0 top-0 z-50 sticky  bg-white bg-opacity-50 backdrop-blur-lg backdrop-filter dark:border dark:border-gray-100/10 dark:bg-boxdark-2'>
-      <nav className='flex justify-around py-6 lg:px-8' aria-label='Global'>
-        <div className='flex lg:flex-1'>
-          <a href='/' className='-m-1.5 p-1.5'>
-            <img className='h-8 w-8' src={logo} alt='My SaaS App' />
-          </a>
-        </div>
-        <div className='flex lg:hidden'>
+      <nav className='p-6 items-center flex justify-between lg:justify-evenly w-full py-6 lg:px-8' aria-label='Global'>
+     
+      <div className='ml-0 lg:ml-24   lg:flex-1'>
+  <a  href='/' className='-m-1.5 flex lg:flex-1 items-center  p-1.5'>
+  <img 
+          className='rounded-xl h-8 w-8 mr-4 object-cover' 
+          
+          src='https://drive.google.com/thumbnail?id=17l_Nmgg4ag0TU2GCUxaBx2C_PmtIWuS4' 
+          alt='My SaaS App' 
+        />
+        <h1 className='flex  text-center font-Poppins text-xl text-zinc-800 font-bold'>Convrt</h1>
+  </a>
+</div>
+
+        <div className='flex  lg:hidden'>
           <button
             type='button'
-            className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-white'
+            className=' inline-flex items-center justify-center rounded-md px-2 bg-black text-white dark:text-white'
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className='sr-only'>Open main menu</span>
             <HiBars3 className='h-6 w-6' aria-hidden='true' />
           </button>
         </div>
-       
-        <div className='hidden lg:flex lg:flex-1 gap-3 justify-around items-center'>
 
-        <div className='hidden lg:flex lg:gap-x-12'>
+
+        <div className='hidden w-2/5 bg-black rounded-full justify-center py-4 lg:flex lg:gap-x-12'>
           {navigation.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className='font-thin font-inter block py-2 pr-4 pl-0 text--zinc-400 rounded bg-black lg:bg-transparent lg:text-zinc-400 lg:p-0'
+              className='text-sm font-Inter font-normal leading-6 text-white duration-300 ease-in-out dark:text-white'
             >
               {item.name}
             </a>
           ))}
         </div>
+
+
+
+        <div className='hidden w-full ml-24 lg:flex lg:flex-1 gap-3 justify-around items-center'>
+
+       
 
           {isUserLoading ? null : !user ? (
             <a href={!user ? '/login' : '/account'} className='text-sm font-semibold leading-6 m-2'>
@@ -98,6 +111,7 @@ export default function AppNavBar() {
                   </a>
                 ))}
               </div>
+            
               <div className='py-6'>
                 {isUserLoading ? null : !user ? (
                   <Link to='/login'>

@@ -258,5 +258,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/forms'),nextui()],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/forms'),nextui(),],
 };
