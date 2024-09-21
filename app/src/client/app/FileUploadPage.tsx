@@ -242,6 +242,8 @@ const FileUploadPage = ({ user }: { user: User }) => {
                               <StatDisplay label="CLICKED" count={clickedEmailsCount} />
                               <VerticalDivider />
                               <StatDisplay label="BOUNCED" count={bouncedEmailsCount} />
+                              
+                              <StatDisplay label="BOUNCED" count={bouncedEmailsCount} />
                             </div>
                           </div>
                         </AccordionSummary>

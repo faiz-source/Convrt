@@ -149,7 +149,7 @@ export default function LandingPage() {
           <div className='py-24 sm:py-32'>
             <div className='mx-auto max-w-8xl px-6 lg:px-8'>
               <div className='lg:mb-18 mx-auto max-w-3xl text-center'>
-                <h1 className='text-4xl mb-6 font-bold text-gray-900 sm:text-6xl dark:text-white'>
+                <h1 className='text-4xl mb-6 font-Poppins font-semibold text-gray-900 sm:text-6xl dark:text-white'>
                 Turn  <span className='italic'>Emails</span> into Revenue
                 </h1>
                 <p>Win new customers with the #1 email marketing and automations platform* that recommends ways to get more opens, clicks, and sales.</p>

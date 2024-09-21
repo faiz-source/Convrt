@@ -14,7 +14,11 @@ module.exports = {
     extend: {
       fontFamily: {
         satoshi: ['Satoshi', 'sans-serif'],
+        Inter : ['Inter'],
+        Poppins : ['Poppins'],
+        Oswald : ['Oswald']
       },
+
       colors: {
         current: 'currentColor',
         transparent: 'transparent',

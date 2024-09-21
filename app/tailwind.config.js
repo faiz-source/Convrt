@@ -1,13 +1,16 @@
 const {nextui} = require('@nextui-org/theme');
+const flowbite = require("flowbite-react/tailwind");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
+    "./index.html",
+     "./src/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/(autocomplete|divider|modal|button|ripple|spinner|input|listbox|popover|scroll-shadow).js"
+    "./node_modules/@nextui-org/theme/dist/components/(autocomplete|divider|modal|button|ripple|spinner|input|listbox|popover|scroll-shadow).js",
+    flowbite.content(),
   ],
   prefix: "",
   theme: {
@@ -20,6 +23,12 @@ module.exports = {
     },
     extend: {
 
+      fontFamily: {
+        satoshi: ['Satoshi', 'sans-serif'],
+        Inter : ['Inter'],
+        Poppins : ['Poppins'],
+        Oswald : ['Oswald']
+      },
 
       animation: {
         marquee: "marquee var(--duration) linear infinite",
@@ -99,5 +108,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require(tailwindcss-animate),nextui()],
+  plugins: [
+    require(tailwindcss-animate),nextui(),
+    flowbite.plugin(),
+  ],
 }
