@@ -24,11 +24,12 @@ import AddIcon from '@mui/icons-material/Add';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
-import { Button } from "@nextui-org/react";
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import EmailStatusChart from '../components/Emailcharts';
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
+import { Card, Overlay, Button, Text } from '@mantine/core';
+import '../Main.css';
 
 const NoBorderTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -105,7 +106,8 @@ const FileUploadPage = ({ user }: { user: User }) => {
     <div>
       {verified ? (
         <>
-          <div className="mt-8 lg:mt-16 px-4 lg:px-8">
+          <div style={{
+          }} className="mt-8 mb-96 pb-32 md:mb-24 md:pb-24 lg:mt-16 px-4 lg:px-8">
 
             <div className='flex flex-row content-center'>
           <h2 className='mb-3 lg:mb-3 ml-4 lg:ml-4  mr-4 text-3xl font-semibold font-Poppins tracking-tight text-gray-900 '>
@@ -179,105 +181,6 @@ const FileUploadPage = ({ user }: { user: User }) => {
               </Box>
             </Modal>
             <EmailStatusChart />
-
-            
-          <div style={{
-            height : '40vh',
-            width : '80vw',
-          }} className='mt-48 bg-black rounded-2xl mb-24'>
-            <Box
-              sx={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23000000' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23111111' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23191919' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23222222' points='337 900 816 900 886 661'/%3E%3Cpolygon fill='%232a2a2a' points='1008 101 1008 831 743 900'/%3E%3Cpolygon fill='%23333333' points='1008 101 1041.6 869.8 743 900'/%3E%3Cpolygon fill='%233b3b3b' points='1041.6 901 1782 612 1782 900'/%3E%3Cpolygon fill='%23444444' points='1782 900 1041.6 869.8 1782 612'/%3E%3Cpolygon fill='%234c4c4c' points='953 612 1782 612 1008 31'/%3E%3Cpolygon fill='%23555555' points='1008 31 1041.6 131.2 1782 612'/%3E%3Cpolygon fill='%235d5d5d' points='348 361 831 361 827 217'/%3E%3Cpolygon fill='%23666666' points='348 361 807.6 661 831 361'/%3E%3Cpolygon fill='%236e6e6e' points='348 28 348 361 827 217'/%3E%3Cpolygon fill='%23777777' points='348 361 807.6 661 516 28'/%3E%3C/svg%3E")`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                padding: '2rem',
-                borderRadius: '1rem',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '2rem',
-                height : '20vh',
-            width : '80vw'
-              }}
-            >
-            
-            </Box>
-          </div>
-
-          </div>
-          <div className="mt-24">
-          <h2 className='mt-2 mb-12 text-3xl font-bold tracking-tight text-gray-900 '>
-            Campaigns
-          </h2>
-            <div className="w-full flex justify-end items-center">
-              <Button
-                className="p-2 bg-black mb-12 w-fit text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg"
-                onClick={handleOpen}
-              >
-                <AddIcon />
-                Create
-              </Button>
-            </div>
-            {sortedCampaigns && sortedCampaigns.length > 0 ? (
-              <div>
-                {sortedCampaigns.map((campaign: any) => {
-                  const openedEmailsCount = campaign.emails.filter((email: any) => email.status === 'OPENED').length;
-                  const deliveredEmailsCount = campaign.emails.filter((email: any) => email.status === 'DELIVERED').length;
-                  const clickedEmailsCount = campaign.emails.filter((email: any) => email.status === 'CLICKED').length;
-                  const bouncedEmailsCount = campaign.emails.filter((email: any) => email.status === 'BOUNCED').length;
-
-                  return (
-                    <div className="mb-10 p-4 border rounded-lg" key={campaign.id}>
-                      <Accordion style={{ boxShadow: 'none' }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
-                          <div className="max-w-full">
-                            <div className="space-y-1">
-                            <h1 className="text-medium font-bold text-gray text-2xl mb-4">{campaign.name}</h1>
-                            <div className="flex flex-row">
-                              <h1 className="font-semibold mr-4">TOTAL : </h1>
-                              {campaign.Totalmail}
-                              </div>
-                            </div>
-                            <Divider className="my-4" style={{ borderWidth: '1px', width: '70vw', marginBottom: '5vh', marginTop: '3vh' }} />
-                            <div className="flex h-5 items-center space-x-4 text-small mb-4 w-full">
-                              <StatDisplay label="OPENED" count={openedEmailsCount} />
-                              <VerticalDivider />
-                              <StatDisplay label="DELIVERED" count={deliveredEmailsCount} />
-                              <VerticalDivider />
-                              <StatDisplay label="CLICKED" count={clickedEmailsCount} />
-                              <VerticalDivider />
-                              <StatDisplay label="BOUNCED" count={bouncedEmailsCount} />
-                              
-                              <StatDisplay label="BOUNCED" count={bouncedEmailsCount} />
-                            </div>
-                          </div>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                        <h1 className="ml-6 font-bold mb-8 mt-4">ALL MAILS</h1>
-                          <ul>
-                            {campaign.emails.map((email: any) => (
-                              <li key={email.id} className="border w-11/12 rounded-lg p-4 flex flex-row mb-4">
-                                <Typography sx={{
-                                  marginRight : '5vw'
-                                }} className="ml-12">
-                                  <strong className="mr-12">EMAIL</strong> {email.recipientEmail}
-                                </Typography>
-                                <Typography>
-                                  <strong className="mr-12">STATUS</strong> {email.status}
-                                </Typography>
-                              </li>
-                            ))}
-                          </ul>
-                        </AccordionDetails>
-                      </Accordion>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <Typography>No campaigns created</Typography>
-            )}
           </div>
         </>
       ) : (

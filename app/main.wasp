@@ -235,6 +235,12 @@ page DemoAppPage {
   component: import DemoAppPage from "@src/client/app/DemoAppPage"
 }
 
+route CampaignRoute { path: "/campaign", to: CampaignPage }
+page CampaignPage {
+  authRequired: true,
+  component: import CampaignPage from "@src/client/app/CampaignPage"
+}
+
 route WriteRoute { path: "/write", to: Write }
 page Write {
   authRequired: true,

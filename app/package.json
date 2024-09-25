@@ -18,6 +18,7 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.20",
     "@mui/system": "^5.15.20",
+    "@mui/x-charts": "^7.18.0",
     "@mui/x-data-grid": "^7.5.1",
     "@mui/x-date-pickers": "^7.5.1",
     "@nextui-org/autocomplete": "^2.1.0",

@@ -6,9 +6,11 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { TiDelete } from 'react-icons/ti';
 import { Button as NextUIButton } from '@nextui-org/react';
 import { importmail } from 'wasp/client/operations';
+import Avatar from '@mui/material/Avatar';
+import '../Main.css'
+import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 export default function DemoAppPage({ user }: { user: User }) {
   const [verified, setVerified] = useState<boolean>(false);
@@ -56,9 +58,35 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'name', headerName: 'Name', width: 150, renderCell: (params) => (
+      <div className='flex  items-center'>
+      <Avatar 
+        src={params.row.logoUrl} 
+        alt={params.row.name} // Assuming each row has a 'logoUrl' field for logo
+        className='mt-1 mr-4'
+      >
+        {params.row.name?.charAt(0)} {/* Show initial if no logo */}
+      </Avatar>
+      <Typography className='mt-3' >{params.row.name}</Typography>
+      </div>
+    ), },
+    { field: 'status', headerName: 'Status', width: 150, renderCell: (params) => (
+      <div className='flex  items-center'>
+     {/*  <Avatar 
+        src={params.row.logoUrl} 
+        alt={params.row.name} 
+        className='mt-1 mr-4'
+      >
+        {params.row.name?.charAt(0)}
+      </Avatar>   */}
+      <Typography className='mt-3' >{params.row.name}</Typography>
+      </div>
+    ), },
+    
     { field: 'email', headerName: 'Email', width: 200 },
-    { field: 'tag', headerName: 'Tag', width: 130 },
+    { field: 'number', headerName: 'Number', width: 200 },
+    { field: 'location', headerName: 'location', width: 200 },
+    { field: 'tag', headerName: 'Tag', width: 100 },
     { field: 'description', headerName: 'Description', width: 250 },
     {
       field: 'actions',
@@ -174,9 +202,9 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
   }));
 
   return (
-    <div className='flex flex-col justify-center gap-10'>
+    <div className='flex w-full flex-col gap-10'>
       <div className='flex flex-row gap-4 w-full justify-between'>
-        <div className='space-y-48'>
+        {/* <div className='space-y-48'>
           <form onSubmit={handleFileUpload} className='border rounded-lg p-8 flex flex-col gap-2'>
             <input
               type='file'
@@ -192,9 +220,9 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
               {isLoading ? 'Uploading...' : 'Upload'}
               </NextUIButton>
               </form>
-              </div>
+              </div> */}
               <div className='flex items-center border rounded-lg p-8 justify-between gap-3'>
-              <Box component='form' onSubmit={handleSubmit} className='flex flex-col gap-4'>
+              {/* <Box component='form' onSubmit={handleSubmit} className='flex flex-col gap-4'>
               <div className='flex flex-row gap-4'>
               <TextField
               id='tag'
@@ -231,13 +259,13 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
                        >
               {isLoading ? 'Adding Task...' : 'Add Task'}
               </NextUIButton>
-              </Box>
+              </Box> */}
               </div>
               </div>
-              <div className='space-y-10 col-span-full'>
+              <div  className='w-full flex justify-start items-start space-y-10 col-span-full'>
               {isTasksLoading && <div>Loading...</div>}
               {sortedTasks && sortedTasks.length > 0 ? (
-              <div className='space-y-4'>
+              <div className='table-container w-full space-y-4'>
               <DataGrid
               rows={rows}
               columns={columns}
