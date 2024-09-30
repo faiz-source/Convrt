@@ -9,7 +9,7 @@ export const serverMiddlewareFn = (middlewareConfig: any) => {
     cors({
       origin: [
         config.frontendUrl, 
-        'https://fuzzy-space-tribble-5p9pp9547v637p95-3000.app.github.dev'
+        'https://sturdy-space-guide-r4prx55vqwr4h5qr6-3000.app.github.dev'
       ],
       credentials: true  // Allow credentials (cookies, auth tokens)
     })

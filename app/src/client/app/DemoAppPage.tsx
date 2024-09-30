@@ -11,6 +11,9 @@ import '../Main.css'
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/material/styles';
 
 export default function DemoAppPage({ user }: { user: User }) {
   const [verified, setVerified] = useState<boolean>(false);
@@ -30,11 +33,11 @@ export default function DemoAppPage({ user }: { user: User }) {
   };
 
   return (
-    <div className='py-10 lg:mt-10'>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='w-full my-8'>
+    <div>
+      <div className='mx-auto my-auto'>
+        <div className='w-11/12 mx-auto my-auto'>
           {verified ? (
-            <div className='w-full py-10 px-6 mx-auto my-8 space-y-10'>
+            <div className='w-full mx-auto my-auto '>
               <NewTaskForm handleCreateTask={createTask} />
             </div>
           ) : (
@@ -55,39 +58,63 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
   const { data: tasks, isLoading: isTasksLoading } = useQuery(getAllTasksByUser);
   const { readString } = usePapaParse();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  const NoBorderTextField = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'none',
+      },
+    },
+  });
+  
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '35%',
+    bgcolor: 'background.paper',
+    borderRadius: '16px',
+    p: 4,
+  };
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Name', width: 150, renderCell: (params) => (
       <div className='flex  items-center'>
-      <Avatar 
-        src={params.row.logoUrl} 
-        alt={params.row.name} // Assuming each row has a 'logoUrl' field for logo
-        className='mt-1 mr-4'
-      >
-        {params.row.name?.charAt(0)} {/* Show initial if no logo */}
-      </Avatar>
-      <Typography className='mt-3' >{params.row.name}</Typography>
+        <Avatar 
+          src={params.row.logoUrl} 
+          alt={params.row.name} 
+          className='mr-4'
+        >
+          {params.row.name?.charAt(0)}
+        </Avatar>
+        <h1 className='font-Inter font-bold '>{params.row.name}</h1>
       </div>
-    ), },
-    { field: 'status', headerName: 'Status', width: 150, renderCell: (params) => (
-      <div className='flex  items-center'>
-     {/*  <Avatar 
-        src={params.row.logoUrl} 
-        alt={params.row.name} 
-        className='mt-1 mr-4'
-      >
-        {params.row.name?.charAt(0)}
-      </Avatar>   */}
-      <Typography className='mt-3' >{params.row.name}</Typography>
-      </div>
-    ), },
-    
+    )},
+    {
+      field: 'status',
+      headerName: 'Status',
+      minWidth: 120,
+      flex: 1,
+      renderCell: (params) => <Typography>{params.row.Status}</Typography>,
+    },
     { field: 'email', headerName: 'Email', width: 200 },
     { field: 'number', headerName: 'Number', width: 200 },
     { field: 'location', headerName: 'location', width: 200 },
-    { field: 'tag', headerName: 'Tag', width: 100 },
-    { field: 'description', headerName: 'Description', width: 250 },
+    {
+      field: 'tag',
+      headerName: 'Tag',
+      minWidth: 150,
+      flex: 1,
+      renderCell: (params) => (
+        <Chip label={params.row.tag} style={{ backgroundColor: '#444CF7', color: 'white' }} />
+      ),
+    },
+    { field: 'description', headerName: 'Website', width: 250 },
     {
       field: 'actions',
       headerName: 'Actions',
@@ -102,6 +129,15 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
       ),
     },
   ];
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+
+  const handleOpen3 = () => setOpen3(true);
+  const handleClose3 = () => setOpen3(false);
 
   const handleDeleteClick = async (id: string) => {
     await deleteTask({ id });
@@ -202,86 +238,65 @@ function NewTaskForm({ handleCreateTask }: { handleCreateTask: typeof createTask
   }));
 
   return (
-    <div className='flex w-full flex-col gap-10'>
-      <div className='flex flex-row gap-4 w-full justify-between'>
-        {/* <div className='space-y-48'>
-          <form onSubmit={handleFileUpload} className='border rounded-lg p-8 flex flex-col gap-2'>
-            <input
-              type='file'
-              name='file-upload'
-              accept='.pdf, .csv, text/*'
-              className='text-gray-600 mb-12'
-            />
-            <NextUIButton
-              type='submit'
-              className='bg-[#000] w-full text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg'
-              disabled={isLoading}
-              >
-              {isLoading ? 'Uploading...' : 'Upload'}
-              </NextUIButton>
+    <div className='flex justify-center items-center w-full h-full min-h-screen '>
+      <div className='border rounded-md w-full h-full '>
+        <div className='w-10/12 p-4 flex mx-auto justify-between mb-4'>
+          <NextUIButton className='bg-[#000] text-white' onClick={handleOpen2}>Add Contact</NextUIButton>
+          <NextUIButton className='bg-[#000] text-white' onClick={handleOpen}>Upload File</NextUIButton>
+          <NextUIButton className='bg-[#000] text-white' onClick={handleOpen3}>Add Tag</NextUIButton>
+        </div>
+
+        {/* Modals */}
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={style}>
+            <div className='space-y-48'>
+              <form onSubmit={handleFileUpload} className='border rounded-lg p-8 flex flex-col gap-2'>
+                <input type='file' name='file-upload' accept='.pdf, .csv, text/*' className='text-gray-600 mb-12' />
+                <NextUIButton type='submit' className='bg-[#000] w-full text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg' disabled={isLoading}>
+                  {isLoading ? 'Uploading...' : 'Upload'}
+                </NextUIButton>
               </form>
-              </div> */}
-              <div className='flex items-center border rounded-lg p-8 justify-between gap-3'>
-              {/* <Box component='form' onSubmit={handleSubmit} className='flex flex-col gap-4'>
-              <div className='flex flex-row gap-4'>
-              <TextField
-              id='tag'
-              name='tag'
-              label='Tag'
-              variant='outlined'
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
-              fullWidth
-              />
-              <TextField
-              id='name'
-              name='name'
-              label='Name'
-              variant='outlined'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              fullWidth
-              />
-              <TextField
-              id='email'
-              name='email'
-              label='Email'
-              variant='outlined'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              fullWidth
-              />
-              </div>
-              <NextUIButton
-                         type='submit'
-                         className='bg-[#000] w-48 text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg'
-                         disabled={isLoading}
-                       >
-              {isLoading ? 'Adding Task...' : 'Add Task'}
-              </NextUIButton>
-              </Box> */}
-              </div>
-              </div>
-              <div  className='w-full flex justify-start items-start space-y-10 col-span-full'>
-              {isTasksLoading && <div>Loading...</div>}
-              {sortedTasks && sortedTasks.length > 0 ? (
-              <div className='table-container w-full space-y-4'>
-              <DataGrid
-              rows={rows}
-              columns={columns}
-              initialState={{
-              pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-              },
-              }}
-              pageSizeOptions={[15, 30]}
-              checkboxSelection
-              />
-              </div>
-              ) : (
-              <div className='text-gray-600 text-center'>Add Contacts to begin</div>
-              )}
-              </div>
-              </div>
-              );
-              }
+            </div>
+          </Box>
+        </Modal>
+
+        <Modal open={open2} onClose={handleClose2}>
+          <Box sx={style}>
+            <div className='flex flex-col items-center border rounded-lg p-8 justify-between gap-3'>
+              <Box component='form' onSubmit={handleSubmit} className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4'>
+                  <TextField id='tag' name='tag' label='Tag' variant='outlined' value={tag} onChange={(e) => setTag(e.target.value)} fullWidth />
+                  <TextField id='name' name='name' label='Name' variant='outlined' value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+                  <TextField id='email' name='email' label='Email' variant='outlined' value={email} onChange={(e) => setEmail(e.target.value)} fullWidth />
+                </div>
+                <NextUIButton type='submit' className='bg-[#000] w-48 text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg' disabled={isLoading}>
+                  {isLoading ? 'Adding Task...' : 'Add Task'}
+                </NextUIButton>
+              </Box>
+            </div>
+          </Box>
+        </Modal>
+
+        <Modal open={open3} onClose={handleClose3}>
+          <Box sx={style}>
+            <div>
+              <h1>hello</h1>
+            </div>
+          </Box>
+        </Modal>
+
+        {/* Data Table */}
+        <div className='w-full flex justify-center items-center'>
+          {isTasksLoading && <div>Loading...</div>}
+          {sortedTasks && sortedTasks.length > 0 ? (
+            <div className='w-full space-y-4'>
+              <DataGrid rows={rows} columns={columns} initialState={{ pagination: { paginationModel: { page: 0, pageSize: 5 } } }} pageSizeOptions={[15, 30]} checkboxSelection />
+            </div>
+          ) : (
+            <div className='text-gray-600 text-center'>Add Contacts to begin</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
