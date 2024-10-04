@@ -1,5 +1,5 @@
 import { type User } from 'wasp/entities';
-import CreateCampaignPage from '../components/CreateCampaign';
+import CreateCampaignPage from '../components/CampaignPage/CreateCampaign';
 
 export default function CampaignPage({ user }: { user: User }) {
  

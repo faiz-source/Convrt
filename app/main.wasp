@@ -130,11 +130,14 @@ psl=}
 
 entity Task {=psl
   id                        String          @id @default(uuid())
-  description               String
+  description               String          @default("null")
+  Location                  String          @default("null")
   email                     String
+  Status                    String          @default("Pending")
   name                      String          @default("null")
   Subscribed                Boolean         @default(true)
   Tag                       String          @default("general")
+  Number                    String          @default("null")
   time                      String          @default("1")
   isDone                    Boolean         @default(false)
   user                      User            @relation(fields: [userId], references: [id])
@@ -229,10 +232,10 @@ page EmailVerificationPage {
   component: import { EmailVerification } from "@src/client/auth/EmailVerification",
 }
 
-route DemoAppRoute { path: "/demo-app", to: DemoAppPage }
+route DemoAppRoute { path: "/contact-list", to: DemoAppPage }
 page DemoAppPage {
   authRequired: true,
-  component: import DemoAppPage from "@src/client/app/DemoAppPage"
+  component: import DemoAppPage from "@src/client/app/ContactsPage"
 }
 
 route CampaignRoute { path: "/campaign", to: CampaignPage }
@@ -244,7 +247,7 @@ page CampaignPage {
 route WriteRoute { path: "/write", to: Write }
 page Write {
   authRequired: true,
-  component: import Write from "@src/client/app/Write"
+  component: import Write from "@src/client/components/CampaignPage/Write"
 }
 
 route PricingPageRoute { path: "/pricing", to: PricingPage }
@@ -264,10 +267,10 @@ page CheckoutPage {
   component: import Checkout from "@src/client/app/CheckoutPage"
 }
 
-route FileUploadRoute { path: "/file-upload", to: FileUploadPage }
+route FileUploadRoute { path: "/mailboard", to: FileUploadPage }
 page FileUploadPage {
   authRequired: true,
-  component: import FileUpload from "@src/client/app/FileUploadPage"
+  component: import FileUpload from "@src/client/app/Mailboard"
 }
 
 route AdminRoute { path: "/admin", to: DashboardPage }

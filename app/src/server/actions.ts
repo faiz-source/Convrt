@@ -257,7 +257,7 @@ export const generateGptResponse: GenerateGptResponse<GptPayload, GeneratedSched
   }
 };
 
-export const createTask: CreateTask<Pick<Task, any>, Task> = async ({ description,  name, email, Subscribed, Tag,  }, context) => {
+export const createTask: CreateTask<Pick<Task, any>, Task> = async ({ description,  name, email, Subscribed, Tag, Number, Status, Location  }, context) => {
   if (!context.user) {
     throw new HttpError(401);
   }
@@ -268,7 +268,10 @@ export const createTask: CreateTask<Pick<Task, any>, Task> = async ({ descriptio
       name,
        email,
         Subscribed,
-         Tag, 
+         Tag,
+         Number,
+         Status,
+         Location, 
       user: { connect: { id: context.user.id } },
     },
   });

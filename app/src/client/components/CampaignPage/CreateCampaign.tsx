@@ -18,15 +18,12 @@ import Divider from '@mui/material/Divider';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import AddIcon from '@mui/icons-material/Add';
-import { Button } from '@mantine/core';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import '../Main.css';
+import '../../Main.css';
 import {  Progress, Text, Group, Paper, SimpleGrid,} from '@mantine/core';
-import {  ThemeIcon } from '@mantine/core';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import { Avatar } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import CampaignCard from './Campaigncard';
 
 
 
@@ -234,148 +231,12 @@ const CreateCampaignPage = ({ user }: { user: User }) => {
               </div>
               {sortedCampaigns && sortedCampaigns.length > 0 ? (
               <div>
-                {sortedCampaigns.map((campaign: any) => {
-                  const totalEmailscount = campaign.emails.length
-                  const openedEmailsCount = campaign.emails.filter((email: any) => email.status === 'OPENED').length;
-                  const deliveredEmailsCount = campaign.emails.filter((email: any) => email.status === 'DELIVERED').length;
-                  const clickedEmailsCount = campaign.emails.filter((email: any) => email.status === 'CLICKED').length;
-                  const bouncedEmailsCount = campaign.emails.filter((email: any) => email.status === 'BOUNCED').length;
-
-                  return (
-
-                    <Paper className='mb-4' withBorder p="xl" radius="xl">
-                      <div className='w-full relative'>
-                      <Avatar.Group style={{ marginBottom : '8px' }}>
-      <Avatar src="https://ilustrandodudas.com/wp-content/uploads/2018/07/behance_jobs.jpg" />
-      <Avatar src="https://static.vecteezy.com/ti/vetor-gratis/p2/3740838-rg-logo-monogram-with-slash-style-design-template-gratis-vetor.jpg" />
-      <Avatar src="https://i.pinimg.com/564x/dd/31/4d/dd314d0ec8d09681989a63a914257a09.jpg" />
-    </Avatar.Group>
-    <ThemeIcon
-          color="dark"
-          variant="light"
-          style={{ color: 'white', backgroundColor: 'black', position: 'absolute', right: 0 , top : 0 }}
-          size={isSmallScreen ? 24 : 38}
-          radius="xl"
-        >
-          <ArrowOutwardIcon className="text-blue" />
-        </ThemeIcon>
-                    <Group  justify="space-between">
-                      <Group align="flex-end" gap="xs">
-
-                        <h1 className='font-Poppins font-bold text-2xl'  style={{ marginTop : '4px' ,marginBottom : '2px' }} >
-                        {campaign.name}
-                        </h1>
-                      </Group>
-                    </Group>
-                    
-                    <Grid className='flex '>
-                   <h2 className='text-zinc-500 font-Inter font-semibold text-sm'> {campaign.Totalmail}00 EMAILS </h2>
-                    </Grid>
-
-                    </div>
-                    <SimpleGrid spacing="xl" cols={{ base: 1, xs: 3 }} mt="xl">
-                      { ( <>
+         
+  {sortedCampaigns?.map(campaign => (
+            <CampaignCard key={campaign.id} campaign={campaign} />
+          ))}
 
 
-    <Box  >
-      <Text className='font-Poppins' tt="uppercase" fz="xs" c="dimmed" fw={600}>
-      Delivered Emails
-      </Text>
-  
-      <Group  justify="space-between" align="flex-end" gap={0}>
-        {/* <Text fw={700}>
-        {deliveredEmailsCount}
-          </Text>
-        
-        <Text
-          c={'#B2C8FF'}
-          fw={700}
-          size="sm"
-        >
-          {((deliveredEmailsCount / totalEmailscount) * 100)} %
-          
-        </Text> */}
-      </Group>
-      <Progress 
-          style={{
-            width: '100%',
-            height : '1vh'
-          }}
-          size={12} mt={4} color={'#444CF7'} value={84} />
-          {/* ((deliveredEmailsCount / totalEmailscount) * 100) */}
-    </Box>
-
-
-    <Box  >
-      <Grid className='flex'>
-             {/* <Text style={{marginRight : '4px'}}  fw={700}>
-        {openedEmailsCount}
-          </Text>  */}
-      <Text className='font-Poppins' tt="uppercase" fz="xs" c="dimmed" fw={600}>
-      Opened Emails
-      </Text>
-</Grid>
-  
-      <Group  justify="space-between" align="flex-end" gap={0}>
- 
-        
-        {/* <Text
-          c={'#80A3FF'}
-          fw={700}
-          size="sm"
-        >
-          {((openedEmailsCount / totalEmailscount) * 100)} %
-          
-        </Text> */}
-      </Group>
-      <Progress 
-          style={{
-            width: '100%',
-            height : '1vh'
-          }}
-          size={12} mt={4} color={'#444CF7'} value={63} />
-          {/* ((openedEmailsCount / totalEmailscount) * 100) */}
-    </Box>
-
-
-    <Box  >
-   <Text className='font-Poppins' tt="uppercase" fz="xs" c="dimmed" fw={600}>
-       Bounced mails
-      </Text>
-  
-      <Group  justify="space-between" align="flex-end" gap={0}>
-        {/* <Text fw={700}>
-        {bouncedEmailsCount}
-          </Text>
-        
-        <Text
-          c={'#444CF7'}
-          fw={700}
-          size="sm"
-        >
-          {((bouncedEmailsCount / totalEmailscount) * 100)} %
-          
-        </Text> */}
-      </Group>
-      <Progress 
-          style={{
-            width: '100%',
-            height : '1vh'
-          }}
-          size={12} mt={4} color={'#444CF7'} value={23} />
-          {/* ((bouncedEmailsCount / totalEmailscount) * 100) */}
-    </Box>
-
-
-    </>
-
-  ) }
-                    </SimpleGrid>
-                  </Paper>
-
-                    
-                   )
-                })}
               </div>
             )  : (
                 <Typography>No campaigns created</Typography>

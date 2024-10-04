@@ -9,9 +9,13 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 
 
+
+
+
 export default function App({ children }: { children: ReactNode }) {
   const location = useLocation();
   const { data: user } = useAuth();
+
 
   const theme = createTheme({
     /** Put your mantine theme override here */
@@ -49,6 +53,7 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
+   
      <MantineProvider theme={theme}>
      <NextUIProvider>
       <div className='min-h-screen dark:text-white dark:bg-boxdark-2'>
@@ -63,6 +68,7 @@ export default function App({ children }: { children: ReactNode }) {
       </div>
       </NextUIProvider>
       </MantineProvider>
+    
     </>
   );
 }

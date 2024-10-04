@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DefaultJsonData } from "../mails/default";
-import { TemplateJsonData } from "../mails/template";
+import { DefaultJsonData } from "../../mails/default";
+import { TemplateJsonData } from "../../mails/template";
 import EmailEditor, { EditorRef } from 'react-email-editor';
 import { Button } from "@nextui-org/react";
 import { useQuery } from 'wasp/client/operations';
@@ -13,7 +13,6 @@ export default function Write({ user }: { user: User }) {
   const [jsonData, setJsonData] = useState<any>(DefaultJsonData);
   const [tempData, setTempData] = useState<any>(TemplateJsonData);
   const [emailData, setEmailData] = useState<any>(null);
-  const [Timedata, setTimeData] = useState<any>(null);
   const emailEditorRef = useRef<EditorRef | any>(null);
   const { data: tasks, isLoading: isTasksLoading } = useQuery(getAllTasksByUser);
   const location = useLocation();
@@ -109,7 +108,7 @@ export default function Write({ user }: { user: User }) {
         console.log("this is from write before campaign ",schedule)
         const campaign = await createCampaign({ name: cname, to, from, subject, body, tag, schedule , mergeTags });
         console.log('Campaign created:', campaign);
-        history.push('/file-upload'); 
+        history.push('/campaign'); 
       }
     } catch (error) {
       console.error('Error creating campaign:', error);
@@ -117,7 +116,7 @@ export default function Write({ user }: { user: User }) {
   };
 
   const handleCancel = () => {
-    history.push('/file-upload'); 
+    history.push('/campaign'); 
   };
 
   return (

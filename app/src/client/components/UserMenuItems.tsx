@@ -23,7 +23,7 @@ export const UserMenuItems = ({ user, setMobileMenuOpen }: { user?: Partial<User
         {path === '/' || path === '/admin' ? (
           <li>
             <Link
-              to='/demo-app'
+              to='/mailboard'
               className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out '
             >
               <MdOutlineSpaceDashboard size='1.1rem' />

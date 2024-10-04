@@ -5,16 +5,14 @@ import { Dialog } from '@headlessui/react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { HiBars3 } from 'react-icons/hi2';
 import { BiLogIn } from 'react-icons/bi';
-import logo from '../static/logo.png';
 import openSaasBanner from '../static/open-saas-banner.jpeg';
 import {  navigation, } from './contentSections';
 import DropdownUser from '../components/DropdownUser';
-import { DOCS_URL } from '../../shared/constants';
 import { UserMenuItems } from '../components/UserMenuItems';
 import Testimonials from './Testimonials';
 import Features from './Features';
 import Footer from './Footer';
-import ShinyButton from '../components/Button';
+import ShinyButton from './Button';
 
 
 export default function LandingPage() {
@@ -22,7 +20,7 @@ export default function LandingPage() {
 
   const { data: user, isLoading: isUserLoading } = useAuth();
 
-  const NavLogo = () => <img className='h-8 w-8' src={logo} alt='Mail Octo' />;
+  const NavLogo = () => <img className='h-8 w-8 rounded-lg' src='https://drive.google.com/thumbnail?id=17l_Nmgg4ag0TU2GCUxaBx2C_PmtIWuS4' alt='Convrt' />;
 
   return (
     <div className='bg-white dark:text-white dark:bg-boxdark-2'>
@@ -32,10 +30,10 @@ export default function LandingPage() {
           <div className='flex items-center lg:flex-1'>
             <a
               href='/'
-              className='flex items-center -m-1.5 p-1.5 text-gray-900 duration-300 ease-in-out hover:text-yellow-500'
+              className='flex  items-center -m-1.5 p-1.5 text-gray-900 duration-300 ease-in-out hover:text-yellow-500'
             >
               <NavLogo />
-              <span className='ml-2 text-sm font-semibold leading-6 dark:text-white'>Mail Octo</span>
+              <span className=' ml-2 flex  text-center font-Poppins text-xl text-zinc-800 font-bold'>Convrt</span>
             </a>
           </div>
           <div className='flex lg:hidden'>

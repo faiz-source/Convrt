@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'wasp/client/operations';
-import { getCampaigns, getAllTasksByUser, importmail } from 'wasp/client/operations';
+import {  getAllTasksByUser, importmail } from 'wasp/client/operations';
 import { useHistory } from 'react-router-dom';
 import { type User } from 'wasp/entities';
 
@@ -14,21 +14,15 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import Divider from '@mui/material/Divider';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import AddIcon from '@mui/icons-material/Add';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
-import EmailStatusChart from '../components/Emailcharts';
+import EmailStatusChart from '../components/MailboardPage/Emailcharts';
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
-import { Card, Overlay, Button, Text } from '@mantine/core';
+import {  Button,  } from '@mantine/core';
 import '../Main.css';
 
 const NoBorderTextField = styled(TextField)({
@@ -60,7 +54,7 @@ const FileUploadPage = ({ user }: { user: User }) => {
   const [time, setTime] = useState<any>(null);
   const [schedule, setSchedule] = useState<boolean>(false);
 
-  const { data: campaigns, isLoading: isCampaignsLoading } = useQuery(getCampaigns);
+ 
   const { data: tasks, isLoading: isTasksLoading } = useQuery(getAllTasksByUser);
 
   const history = useHistory();
@@ -78,7 +72,7 @@ const FileUploadPage = ({ user }: { user: User }) => {
   };
 
 
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -100,7 +94,7 @@ const FileUploadPage = ({ user }: { user: User }) => {
   const uniqueTags = Array.from(new Set(tasks?.map((task: any) => task.Tag) || []));
   const sortedUniqueTags = uniqueTags.sort();
 
-  const sortedCampaigns = campaigns?.slice().sort((a: any, b: any) => (a.Tag < b.Tag ? -1 : 1));
+ 
 
   return (
     <div>
@@ -190,16 +184,8 @@ const FileUploadPage = ({ user }: { user: User }) => {
   );
 };
 
-const StatDisplay = ({ label, count }: { label: string; count: number }) => (
-  <div style={{ marginRight: '3vw' }} className="flex flex-col justify-center text-center">
-    <Typography className="mb-1 font-semibold">{label}</Typography>
-    <Typography>{count}</Typography>
-  </div>
-);
 
-const VerticalDivider = () => (
-  <Divider style={{ borderColor: 'gray', borderWidth: '1px', height: '5vh', marginRight: '3vw' }} orientation="vertical" />
-);
+
 
 export default FileUploadPage;
 

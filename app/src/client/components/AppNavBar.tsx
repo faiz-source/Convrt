@@ -5,22 +5,35 @@ import { Dialog } from '@headlessui/react';
 import { BiLogIn } from 'react-icons/bi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { HiBars3 } from 'react-icons/hi2';
-import logo from '../static/logo.png';
 import DropdownUser from './DropdownUser';
 import { UserMenuItems } from '../components/UserMenuItems';
+import { useEffect } from 'react';
+import Avatar from '@mui/material/Avatar';
 
 const navigation = [
-  { name: 'Contacts', href: '/demo-app' },
-  { name: 'Mailboard', href: '/file-upload' },
+  { name: 'Contacts', href: '/contact-list' },
+  { name: 'Mailboard', href: '/mailboard' },
   { name: 'Campaign', href: '/campaign' },
 ];
 
-const NavLogo = () => <img className='h-8 w-8' src={logo} alt='Your SaaS App' />;
+const NavLogo = () => <img className='h-8 w-8' src={'https://lh3.googleusercontent.com/d/17l_Nmgg4ag0TU2GCUxaBx2C_PmtIWuS4=s220?authuser=0'} alt='Your SaaS App' />;
 
 export default function AppNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const { data: user, isLoading: isUserLoading } = useAuth();
+
+
+  useEffect(() => {
+    // Generate a random user avatar URL
+    const randomId = Math.floor((Math.random() * 90) + 1); // Generates a number between 1 and 90
+    const avatarUrl = `https://randomuser.me/api/portraits/men/${randomId}.jpg`;
+    setAvatarUrl(avatarUrl);  // Set the generated URL
+  }, []); 
+
+
+
   return (
     <header className='absolute inset-x-0 top-0 z-50 sticky  bg-white bg-opacity-50 backdrop-blur-lg backdrop-filter dark:border dark:border-gray-100/10 dark:bg-boxdark-2'>
       <nav className='p-6 items-center flex justify-between lg:justify-evenly w-full py-6 lg:px-8' aria-label='Global'>
@@ -31,7 +44,7 @@ export default function AppNavBar() {
           className='rounded-xl h-8 w-8 mr-4 object-cover' 
           
           src='https://drive.google.com/thumbnail?id=17l_Nmgg4ag0TU2GCUxaBx2C_PmtIWuS4' 
-          alt='My SaaS App' 
+          alt='Convrt' 
         />
         <h1 className='flex  text-center font-Poppins text-xl text-zinc-800 font-bold'>Convrt</h1>
   </a>
@@ -40,11 +53,10 @@ export default function AppNavBar() {
         <div className='flex  lg:hidden'>
           <button
             type='button'
-            className=' inline-flex items-center justify-center rounded-md px-2 bg-black text-white dark:text-white'
+            className=' inline-flex items-center justify-center rounded-md px-2  text-white dark:text-white'
             onClick={() => setMobileMenuOpen(true)}
           >
-            <span className='sr-only'>Open main menu</span>
-            <HiBars3 className='h-6 w-6' aria-hidden='true' />
+             <Avatar alt="Remy Sharp" src={avatarUrl} />
           </button>
         </div>
 
