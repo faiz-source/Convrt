@@ -37,6 +37,7 @@ export default function Footer() {
         gap: { xs: 4, sm: 8 },
         py: { xs: 8, sm: 10 },
         textAlign: { sm: 'center', md: 'left' },
+        marginTop: { sm: '0', md: '15vh' },
       }}
     >
       <Box
@@ -57,7 +58,7 @@ export default function Footer() {
         >
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
             <Box >
-              <h1>Octomail</h1>
+              <h1 className='font-Poppins font-bold '>Convrt</h1>
             </Box>
             <Typography variant="body2" color="text.secondary" mb={2}>
               Subscribe to our newsletter for weekly updates and promotions.
@@ -76,7 +77,7 @@ export default function Footer() {
                   'aria-label': 'Enter your email address',
                 }}
               />
-              <Button variant="contained" color="primary" sx={{ flexShrink: 0 }}>
+              <Button variant="contained"  sx={{ flexShrink: 0 , backgroundColor: 'black'}}>
                 Subscribe
               </Button>
             </Stack>
